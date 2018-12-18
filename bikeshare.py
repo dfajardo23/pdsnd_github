@@ -23,7 +23,7 @@ def get_filters():
         print("Sorry, {} is not valid city selection.".format(city))
         city = input("Please enter \"chicago\", \"new york city\" or \"washington\" to view Bike Share Data: ")
         city = city.lower()
-                
+
 
 
     # TO DO: get user input for month (all, january, february, ... , june)
@@ -102,7 +102,7 @@ def time_stats(df):
     df["hour"] = df["Start Time"].dt.hour
     common_hour = df["hour"].mode()[0]
     print("The most common hour  in was {}.\n".format(common_hour))
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -157,11 +157,12 @@ def user_stats(df):
     user_types = df["User Type"].value_counts()
     print("User Type Totals: \n{}\n".format(user_types))
     # TO DO: Display counts of gender
-    try: 
+    try:
         genders = df['Gender'].value_counts()
         print("Gender:")
         print(genders)
         print()
+    #Create exception in the event CSV file doesn't have any gender data
     except KeyError:
         print("There isn't a [Gender] column in this spreedsheet!\n")
 
@@ -172,6 +173,7 @@ def user_stats(df):
         most_recent_year = df["Birth Year"].max()
         common_year = df["Birth Year"].mode()[0]
         print("\nThe earliest year of birth was {}.\nThe most recent year of birth was {}.\nThe most common year of birth was {}.".format(earliest_year,most_recent_year,common_year))
+    #Create exception in the event CSV file doesn't have any birthdate data
     except KeyError:
         print("There isn't a [Birth Year] column in this spreedsheet!")
 
@@ -189,7 +191,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        
+
 
         yes_count = 0
         see_more = input("Would you like to see 5 lines of raw data?\n")
@@ -198,16 +200,16 @@ def main():
             print(df.head())
             see_more = input("Would you like to see 5 more lines of data?\n")
             while see_more == "yes":
-                yes_count += 1 
+                yes_count += 1
                 display_rows = 5 * yes_count
                 print(yes_count)
                 print("Displaying {} lines of data:\n".format(display_rows))
                 print(df.head(display_rows))
                 see_more = input("Would you like to see 5 more lines of data? ")
 
-            
-        
-        
+
+
+
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
