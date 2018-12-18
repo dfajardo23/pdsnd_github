@@ -164,6 +164,7 @@ def user_stats(df):
         print("Gender:")
         print(genders)
         print()
+    #Create exception in the event CSV file doesn't have any gender data
     except KeyError:
         print("There isn't a [Gender] column in this spreedsheet!\n")
 
@@ -174,6 +175,7 @@ def user_stats(df):
         most_recent_year = df["Birth Year"].max()
         common_year = df["Birth Year"].mode()[0]
         print("\nThe earliest year of birth was {}.\nThe most recent year of birth was {}.\nThe most common year of birth was {}.".format(earliest_year,most_recent_year,common_year))
+    #Create exception in the event CSV file doesn't have any birthdate data
     except KeyError:
         print("There isn't a [Birth Year] column in this spreedsheet!")
 
